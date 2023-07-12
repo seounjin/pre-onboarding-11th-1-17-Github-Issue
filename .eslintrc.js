@@ -5,11 +5,11 @@ module.exports = {
   },
   extends: [
     "react-app",
-    "airbnb",
-    "prettier",
-    "prettier/@typescript-eslint",
-    "prettier/react",
-    "standard-with-typescript",
+    // "airbnb-base",
+    // "prettier",
+    // "prettier/@typescript-eslint",
+    // "prettier/react",
+    // "standard-with-typescript",
     "plugin:react/recommended",
   ],
   overrides: [
@@ -24,9 +24,11 @@ module.exports = {
     },
   ],
   parserOptions: {
+    project: './tsconfig.json',
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  ignorePatterns: ['.eslintrc.js'],
   plugins: ["prettier"],
   rules: {
     "prettier/prettier": "error",
