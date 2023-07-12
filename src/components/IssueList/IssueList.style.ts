@@ -4,6 +4,12 @@ export const Wrapper = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+  overflow-y: auto;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Item = styled.li`
@@ -26,6 +32,8 @@ export const Date = styled.span``;
 
 export const CommentCount = styled.span``;
 
-export const LeftSection = styled.div``;
+export const LeftSection = styled.div`
+  flex: 1;
+`;
 
 export const RightSection = styled.div``;

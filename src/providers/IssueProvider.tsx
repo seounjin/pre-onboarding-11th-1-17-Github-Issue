@@ -7,7 +7,7 @@ interface IssueProviderProps {
 }
 
 export function IssueProvider({ children }: IssueProviderProps) {
-  const [issue, setIssue] = useState([]);
+  const [issue, setIssue] = useState<any[]>([]);
 
   const handleIssueItemsResponse = async () => {
     const res = await getIssueItems();
@@ -15,9 +15,9 @@ export function IssueProvider({ children }: IssueProviderProps) {
     setIssue(res.data);
   };
 
-  //   useEffect(() => {
-  //     handleIssueItemsResponse();
-  //   }, []);
+  useEffect(() => {
+    handleIssueItemsResponse();
+  }, []);
 
   return (
     <IssueContext.Provider value={{ issue }}>{children}</IssueContext.Provider>
