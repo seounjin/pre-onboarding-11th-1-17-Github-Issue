@@ -1,4 +1,6 @@
 import { useContext } from 'react';
-import { IssueContext } from '../contexts/IssueContext';
+import { DetailIssueContext, IssueContext } from '../contexts/IssueContext';
 
 export const useIssue = () => useContext(IssueContext);
+
+export const useDetailIssue = () => useContext(DetailIssueContext);

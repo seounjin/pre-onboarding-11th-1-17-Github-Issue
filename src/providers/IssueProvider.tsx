@@ -6,7 +6,7 @@ interface IssueProviderProps {
   children: ReactNode;
 }
 
-export function IssueProvider({ children }: IssueProviderProps) {
+const IssueProvider = ({ children }: IssueProviderProps) => {
   const [issue, setIssue] = useState<any[]>([]);
   const [issuePage, setIssuePage] = useState<number>(1);
 
@@ -18,8 +18,15 @@ export function IssueProvider({ children }: IssueProviderProps) {
   };
 
   return (
-    <IssueContext.Provider value={{ issue, handleIssueItemsResponse }}>
+    <IssueContext.Provider
+      value={{
+        issue,
+        handleIssueItemsResponse,
+      }}
+    >
       {children}
     </IssueContext.Provider>
   );
-}
+};
+
+export default IssueProvider;

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.ul`
@@ -12,14 +13,8 @@ export const Wrapper = styled.ul`
   }
 `;
 
-export const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px 20px;
-  padding-bottom: 10px;
-
-  border-bottom: 1px solid #000;
+export const IssueItemWrapper = styled.li`
+  padding: 0 20px;
 `;
 
 export const Title = styled.h4`
@@ -37,3 +32,8 @@ export const LeftSection = styled.div`
 `;
 
 export const RightSection = styled.div``;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`;
