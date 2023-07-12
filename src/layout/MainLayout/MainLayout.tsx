@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Wrapper, Wireframe } from './MainLayout.style';
+import { Wrapper, Wireframe, Title } from './MainLayout.style';
 
 interface MainLayoutProps {
   children: ReactNode;
@@ -8,7 +8,10 @@ interface MainLayoutProps {
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <Wrapper>
-      <Wireframe>{children}</Wireframe>
+      <Wireframe>
+        <Title>Angular/Angular-cli</Title>
+        {children}
+      </Wireframe>
     </Wrapper>
   );
 };
