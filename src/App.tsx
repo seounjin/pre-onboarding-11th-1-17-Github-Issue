@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
-import { getIssueItems } from './api/issueApi';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainPage from './pages/MainPage';
 
-function App(): JSX.Element {
-  const handleIssueItemsResponse = async () => {
-    const res = await getIssueItems();
-    console.log('확인', res.data);
-  };
-
-  useEffect(() => {
-    handleIssueItemsResponse();
-  }, []);
-
+function App() {
   return (
-    <div className="App">
-      <div>시작</div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
