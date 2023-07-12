@@ -15,9 +15,9 @@ export function IssueProvider({ children }: IssueProviderProps) {
     setIssue(res.data);
   };
 
-  useEffect(() => {
-    handleIssueItemsResponse();
-  }, []);
+  //   useEffect(() => {
+  //     handleIssueItemsResponse();
+  //   }, []);
 
   return (
     <IssueContext.Provider value={{ issue }}>{children}</IssueContext.Provider>
