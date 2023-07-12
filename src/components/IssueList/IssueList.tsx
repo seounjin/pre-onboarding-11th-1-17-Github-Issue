@@ -30,7 +30,11 @@ const IssueList = () => {
         issue.map(
           ({ number, title, comments, created_at, user: { login } }, index) => (
             <Fragment key={`i${index}`}>
-              {index !== 0 && !(index % 4) && <AdvertisementBanner />}
+              {index !== 0 && !(index % 4) && (
+                <StyledLink to="https://www.wanted.co.kr/" target="_blank">
+                  <AdvertisementBanner />
+                </StyledLink>
+              )}
               <StyledLink to={`/detail/${number}`}>
                 <IssueItemWrapper>
                   <IssueItem
