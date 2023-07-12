@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
-import { getIssueDetailItem } from '../api/issueApi';
 import { DetailIssueContext } from '../contexts/IssueContext';
+import { useFetcher } from '../hooks/useFetcher';
 
 interface DetailIssueProviderProps {
   children: ReactNode;
@@ -8,17 +8,17 @@ interface DetailIssueProviderProps {
 
 const DetailIssueProvider = ({ children }: DetailIssueProviderProps) => {
   const [detailIssue, setDetailIssue] = useState(null);
+  const fetcher = useFetcher();
 
-  const handleDetailIssueItemsResponse = async (number: number) => {
-    const res = await getIssueDetailItem(number);
-    console.log('res', res.data);
-    setDetailIssue(res.data);
+  const getIssueDetailItem = async (number: number) => {
+    const url = `https://api.github.com/repos/facebook/react/issues/${number}`;
+    const data = await fetcher('GET', url, {});
+    console.log('data', data);
+    setDetailIssue(data);
   };
 
   return (
-    <DetailIssueContext.Provider
-      value={{ detailIssue, handleDetailIssueItemsResponse }}
-    >
+    <DetailIssueContext.Provider value={{ detailIssue, getIssueDetailItem }}>
       {children}
     </DetailIssueContext.Provider>
   );

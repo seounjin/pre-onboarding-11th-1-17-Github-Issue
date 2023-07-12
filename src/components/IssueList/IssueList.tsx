@@ -3,25 +3,15 @@ import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import { useIssue } from '../../hooks/useIssue';
 import AdvertisementBanner from '../AdvertisementBanner/AdvertisementBanner';
 import IssueItem from '../IssueItem/IssueItem';
-import {
-  Wrapper,
-  IssueItemWrapper,
-  RightSection,
-  LeftSection,
-  Title,
-  Writer,
-  Date,
-  CommentCount,
-  StyledLink,
-} from './IssueList.style';
+import { Wrapper, IssueItemWrapper, StyledLink } from './IssueList.style';
 
 const IssueList = () => {
-  const { issue, handleIssueItemsResponse } = useIssue();
+  const { issue, getIssueItems } = useIssue();
   const target = useRef(null);
   const Intersecting = useInfiniteScroll(target);
 
   useEffect(() => {
-    if (Intersecting) handleIssueItemsResponse();
+    if (Intersecting) getIssueItems();
   }, [Intersecting]);
 
   return (

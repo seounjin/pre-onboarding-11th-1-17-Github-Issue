@@ -15,6 +15,12 @@ export const Header = styled.div`
 
 export const Content = styled.div`
   padding: 20px;
+  overflow-y: auto;
+  height: 600px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Avatar = styled.img`

@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
-import { getIssueItems } from '../api/issueApi';
 import { IssueContext } from '../contexts/IssueContext';
+import { useFetcher } from '../hooks/useFetcher';
 
 interface IssueProviderProps {
   children: ReactNode;
@@ -9,19 +9,22 @@ interface IssueProviderProps {
 const IssueProvider = ({ children }: IssueProviderProps) => {
   const [issue, setIssue] = useState<any[]>([]);
   const [issuePage, setIssuePage] = useState<number>(1);
+  const fetcher = useFetcher();
 
-  const handleIssueItemsResponse = async () => {
-    const res = await getIssueItems(20, issuePage);
-    console.log('확인', res.data);
+  const getIssueItems = async () => {
+    const url = `https://api.github.com/repos/facebook/react/issues?per_page=${20}&page=${issuePage}&sort=comments`;
+
+    const data = await fetcher('GET', url, {});
+    console.log('확인', data);
     setIssuePage((issuePage) => issuePage + 1);
-    setIssue([...issue, ...res.data]);
+    setIssue([...issue, ...data]);
   };
 
   return (
     <IssueContext.Provider
       value={{
         issue,
-        handleIssueItemsResponse,
+        getIssueItems,
       }}
     >
       {children}

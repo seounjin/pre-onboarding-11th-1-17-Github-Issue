@@ -3,20 +3,20 @@ import { createContext } from 'react';
 // todo 이슈 타입 지정
 export type IssueContextType = {
   issue: any[];
-  handleIssueItemsResponse: () => void;
+  getIssueItems: () => void;
 };
 
 export const IssueContext = createContext<IssueContextType>({
   issue: [],
-  handleIssueItemsResponse: () => null,
+  getIssueItems: () => null,
 });
 
 export type DetailIssueContextType = {
   detailIssue: any;
-  handleDetailIssueItemsResponse: (number: number) => Promise<void>;
+  getIssueDetailItem: (number: number) => Promise<void>;
 };
 
 export const DetailIssueContext = createContext<DetailIssueContextType>({
   detailIssue: null,
-  handleDetailIssueItemsResponse: () => Promise.resolve(),
+  getIssueDetailItem: () => Promise.resolve(),
 });
