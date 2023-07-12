@@ -1,5 +1,5 @@
-import React from 'react';
-import { IssueContextType } from '../../contexts/IssueContext';
+import { useEffect, useRef } from 'react';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import { useIssue } from '../../hooks/useIssue';
 import {
   Wrapper,
@@ -13,7 +13,13 @@ import {
 } from './IssueList.style';
 
 const IssueList = () => {
-  const { issue } = useIssue();
+  const { issue, handleIssueItemsResponse } = useIssue();
+  const target = useRef(null);
+  const Intersecting = useInfiniteScroll(target);
+
+  useEffect(() => {
+    if (Intersecting) handleIssueItemsResponse();
+  }, [Intersecting]);
 
   return (
     <Wrapper>
@@ -32,6 +38,7 @@ const IssueList = () => {
             </Item>
           )
         )}
+      <div ref={target} style={{ height: '1px' }} />
     </Wrapper>
   );
 };

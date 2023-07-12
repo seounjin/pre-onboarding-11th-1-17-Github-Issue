@@ -5,7 +5,7 @@ export const Wrapper = styled.ul`
   padding: 0;
   margin: 0;
   overflow-y: auto;
-  height: 100%;
+  height: 700px;
 
   &::-webkit-scrollbar {
     display: none;
