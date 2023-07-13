@@ -1,11 +1,15 @@
-import { Fragment, useEffect, useRef } from 'react';
+import { Fragment, ReactNode, useEffect, useRef } from 'react';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import { useIssue } from '../../hooks/useIssue';
-import AdvertisementBanner from '../AdvertisementBanner/AdvertisementBanner';
 import IssueItem from '../IssueItem/IssueItem';
+import ScrollObserver from '../ScrollObserver/ScrollObserver';
 import { Wrapper, IssueItemWrapper, StyledLink } from './IssueList.style';
 
-const IssueList = () => {
+interface IssueListProps {
+  children?: ReactNode;
+}
+
+const IssueList = ({ children }: IssueListProps) => {
   const { issue, getIssueItems } = useIssue();
   const target = useRef(null);
   const Intersecting = useInfiniteScroll(target);
@@ -20,13 +24,8 @@ const IssueList = () => {
         issue.map(
           ({ number, title, comments, created_at, user: { login } }, index) => (
             <Fragment key={`i${index}`}>
-              {index !== 0 && !(index % 4) && (
-                <StyledLink to="https://www.wanted.co.kr/" target="_blank">
-                  <AdvertisementBanner />
-                </StyledLink>
-              )}
-              <StyledLink to={`/detail/${number}`}>
-                <IssueItemWrapper>
+              <IssueItemWrapper>
+                <StyledLink to={`/detail/${number}`}>
                   <IssueItem
                     number={number}
                     title={title}
@@ -34,12 +33,16 @@ const IssueList = () => {
                     created_at={created_at}
                     comments={comments}
                   />
-                </IssueItemWrapper>
-              </StyledLink>
+                </StyledLink>
+              </IssueItemWrapper>
+
+              {!((index + 1) % 4) && (
+                <IssueItemWrapper>{children}</IssueItemWrapper>
+              )}
             </Fragment>
           )
         )}
-      <div ref={target} style={{ height: '1px' }} />
+      <ScrollObserver ref={target} />
     </Wrapper>
   );
 };

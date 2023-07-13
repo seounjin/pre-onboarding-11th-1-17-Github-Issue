@@ -9,7 +9,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <Wrapper>
       <Wireframe>
-        <Title>Angular/Angular-cli</Title>
+        <Title>facebook/react</Title>
         {children}
       </Wireframe>
     </Wrapper>

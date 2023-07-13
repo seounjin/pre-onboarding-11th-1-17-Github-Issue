@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   Wrapper,
   LeftSection,
@@ -28,7 +29,7 @@ const IssueItem = ({
       <LeftSection>
         <Title>{'#' + number + ' ' + title} </Title>
         <Writer>작성자: {login + ', '}</Writer>
-        <Date>작성일: {created_at}</Date>
+        <Date>작성일: {moment(created_at).format('YYYY-MM-DD')}</Date>
       </LeftSection>
       <RightSection>
         <CommentCount>코멘트: {comments}</CommentCount>

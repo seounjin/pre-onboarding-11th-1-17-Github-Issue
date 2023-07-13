@@ -1,11 +1,18 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { Wrapper, Image } from './AdvertisementBanner.style';
 
-const AdvertisementBanner = () => {
+interface AdvertisementBannerProps {
+  imgSrc: string;
+  link: string;
+}
+
+const AdvertisementBanner = ({ imgSrc, link }: AdvertisementBannerProps) => {
   return (
-    <Wrapper>
-      <Image src="https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100" />
-    </Wrapper>
+    <Link to={link} target="_blank">
+      <Wrapper>
+        <Image src={imgSrc} />
+      </Wrapper>
+    </Link>
   );
 };
 

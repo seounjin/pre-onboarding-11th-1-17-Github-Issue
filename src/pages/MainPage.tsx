@@ -1,20 +1,18 @@
+import AdvertisementBanner from '../components/AdvertisementBanner/AdvertisementBanner';
 import IssueList from '../components/IssueList/IssueList';
-import { ShadeScreen } from '../components/ShadeScreen/ShadeScreen';
-import Spinner from '../components/Spinner/Spinner';
-import { useLoading } from '../hooks/useLoading';
 import MainLayout from '../layout/MainLayout/MainLayout';
 
 const MainPage = () => {
-  const { isLoading } = useLoading();
-
   return (
     <MainLayout>
-      <IssueList />
-      {isLoading && (
-        <ShadeScreen>
-          <Spinner />
-        </ShadeScreen>
-      )}
+      <IssueList>
+        <AdvertisementBanner
+          imgSrc={
+            'https://image.wanted.co.kr/optimize?src=https%3A%2F%2Fstatic.wanted.co.kr%2Fimages%2Fuserweb%2Flogo_wanted_black.png&w=110&q=100'
+          }
+          link={'https://www.wanted.co.kr/'}
+        />
+      </IssueList>
     </MainLayout>
   );
 };
