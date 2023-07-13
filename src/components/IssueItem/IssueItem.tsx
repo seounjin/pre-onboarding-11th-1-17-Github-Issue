@@ -1,4 +1,5 @@
 import moment from 'moment';
+import React from 'react';
 import {
   Wrapper,
   LeftSection,
@@ -38,4 +39,4 @@ const IssueItem = ({
   );
 };
 
-export default IssueItem;
+export default React.memo(IssueItem);
