@@ -25,6 +25,15 @@ $ npm run start
 
 <br />
 
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/256230574-44e51e23-cd6b-4034-8246-efc1c86f30e1.gif" /></td>
+  </tr>
+</table>
+
+<br />
+
+
 ### 이슈 상세 목록
 
 - useParams 훅을 사용하여 url의 파라미터를 받아 상세 이슈 number를 가져왔습니다.
@@ -41,6 +50,15 @@ useEffect(() => {
    }
 }, []);
 ```
+
+<br />
+
+
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/256230585-c78d8c55-625e-4c75-9e38-530730de0dc9.gif" /></td>
+  </tr>
+</table>
 
 <br />
 
@@ -110,8 +128,6 @@ export default React.memo(IssueItem);
 - ScrollObserver 컴포넌트에 관찰자로 두고 issueList 맨끝에 위치시킵니다.
 - 해당 요소는 IntersectionObserver에 등록되어 특정 위치에 교차하는 시점을 감지합니다.
 - ScrollObserver 컴포넌트가 화면에 나타나는 순간, 즉 issueList 끝에 도달했을때 issue데이터를 요청합니다.
-
-<br />
 
 
 ## Context API를 활용한 API 연동
@@ -187,4 +203,92 @@ export const useFetcher = () => {
 ```
 
 <br />
+
+## 리팩토링
+
+### 의미가 드러나지 않는 값들 대신에 의미를 명확하게 알려주기
+
+- 5번째 목록 마다 children목록을 렌더링하는 코드입니다.
+- 기존의 코드는 겉으로 봤을때 어떠한 역할을 하는지 한눈에 알아볼 수 없습니다.
+- 수정 후에는 명확하게 어떠한 의미인지 알 수 있습니다.
+
+수정 전
+
+```tsx
+{!((index + 1) % 4) && (
+       <IssueItemWrapper>{children}</IssueItemWrapper>
+)}
+```
+
+수정 후
+
+```tsx
+{isItMultipleOfFive(index + 1) && (
+       <IssueItemWrapper>{children}</IssueItemWrapper>
+)}
+```
+
+### 상세 페이지 이동시 이전 데이터 남아있는 이슈
+
+- 상세 페이지에서 목록 리스트 이동, 다시 상세페이지로 이동시 이전에 있던 데이터가 남아있는 이슈가 발생하였습니다.
+- 원인은 SPA구조에서 페이지 이동시 새로고침이 일어나지 않기 때문에 이전에 로드된 데이터가 유지되는 것이 었습니다.
+- useEffect의 반환 함수에서 상세 이슈의 상태를 리셋하는 함수를 호출하여 컴포넌트가 언마운트될 때 상태를 초기화함으로써 문제를 해결했습니다
+
+```tsx
+const DetailPage = () => {
+  const { number } = useParams();
+  const { detailIssue, getIssueDetailItem, resetDetailIssue } =
+    useDetailIssue();
+
+  useEffect(() => {
+    if (number) {
+      const detailNumber = parseInt(number);
+      getIssueDetailItem(detailNumber);
+    }
+    return () => {
+      resetDetailIssue();
+    };
+  }, []);
+
+  ....
+};
+
+export default DetailPage;
+```
+
+<br />
+
+<div align="center">
+  
+### 수정 전 화면
+
+</div>
+
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/256230555-678ac892-5ae7-41a9-986c-c01584a98299.gif" /></td>
+  </tr>
+</table>
+
+<br />
+
+<div align="center">
+  
+### 수정 후 화면
+
+</div>
+
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/256230569-92bb8201-69be-4ad0-9241-41694e143b00.gif" /></td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
 
