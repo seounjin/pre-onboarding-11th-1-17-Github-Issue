@@ -1,6 +1,7 @@
 import { Fragment, ReactNode, useEffect, useRef } from 'react';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 import { useIssue } from '../../hooks/useIssue';
+import { isItMultipleOfFive } from '../../utils/isItMultipleOfFive';
 import IssueItem from '../IssueItem/IssueItem';
 import ScrollObserver from '../ScrollObserver/ScrollObserver';
 import { Wrapper, IssueItemWrapper, StyledLink } from './IssueList.style';
@@ -36,7 +37,7 @@ const IssueList = ({ children }: IssueListProps) => {
                 </StyledLink>
               </IssueItemWrapper>
 
-              {!((index + 1) % 4) && (
+              {isItMultipleOfFive(index + 1) && (
                 <IssueItemWrapper>{children}</IssueItemWrapper>
               )}
             </Fragment>
