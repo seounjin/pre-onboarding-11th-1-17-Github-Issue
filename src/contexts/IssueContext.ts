@@ -14,9 +14,11 @@ export const IssueContext = createContext<IssueContextType>({
 export type DetailIssueContextType = {
   detailIssue: any;
   getIssueDetailItem: (number: number) => Promise<void>;
+  resetDetailIssue: () => void;
 };
 
 export const DetailIssueContext = createContext<DetailIssueContextType>({
   detailIssue: null,
   getIssueDetailItem: () => Promise.resolve(),
+  resetDetailIssue: () => null,
 });

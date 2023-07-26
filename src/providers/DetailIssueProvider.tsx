@@ -17,8 +17,14 @@ const DetailIssueProvider = ({ children }: DetailIssueProviderProps) => {
     setDetailIssue(data);
   };
 
+  const resetDetailIssue = () => {
+    setDetailIssue(null);
+  };
+
   return (
-    <DetailIssueContext.Provider value={{ detailIssue, getIssueDetailItem }}>
+    <DetailIssueContext.Provider
+      value={{ detailIssue, getIssueDetailItem, resetDetailIssue }}
+    >
       {children}
     </DetailIssueContext.Provider>
   );

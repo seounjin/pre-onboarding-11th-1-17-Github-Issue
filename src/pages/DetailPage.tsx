@@ -6,13 +6,17 @@ import MainLayout from '../layout/MainLayout/MainLayout';
 
 const DetailPage = () => {
   const { number } = useParams();
-  const { detailIssue, getIssueDetailItem } = useDetailIssue();
+  const { detailIssue, getIssueDetailItem, resetDetailIssue } =
+    useDetailIssue();
 
   useEffect(() => {
     if (number) {
       const detailNumber = parseInt(number);
       getIssueDetailItem(detailNumber);
     }
+    return () => {
+      resetDetailIssue();
+    };
   }, []);
 
   return (
