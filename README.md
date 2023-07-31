@@ -1,4 +1,6 @@
 # pre-onboarding-11th-3-17th (Github API Project)
+# 과제설명
+GitHub REST API를 사용하여 리액트 깃헙 레파지토리의 이슈 목록과 상세 내용을 확인하는 웹 사이트 구축하는 과제입니다.
 
 <br />
 
